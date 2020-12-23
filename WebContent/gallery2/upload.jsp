@@ -1,4 +1,4 @@
-<%@page import="common.FileManager"%>
+<%@page import="common.file.FileManager"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.File"%>
@@ -15,7 +15,7 @@
 
 	//업로드 객체를 생성해주는 팩토리 객체 : 주로 설정을 담당(서버의 저장경로, 파일의 용량제한..)
 	DefaultFileItemFactory itemFactory=new DefaultFileItemFactory();
-	itemFactory.setRepository(new File("saveDir"));//저장될 위치!!
+	itemFactory.setRepository(new File(saveDir));//저장될 위치!!, 물리적인 저장인 아닌, 임시디렉토리, 육안확인불가
 	itemFactory.setSizeThreshold(maxSize);//용량을 지정한 크기로 제한
 	
 	//이 객체가 실제 업로드를 수행함
@@ -36,11 +36,18 @@
 		if(!item.isFormField()){//텍스트박스가 아닌것만 업로드 처리!!
 			//업로드 처리하자!! 현재 메모리상의 이미지 정보를 실제 물리적 파일로 저장하자!!
 			//새롭게 생성할 파일명
-			//out.print("당신이 업로드한 파일의 원래 이름은 "+item.getName());
-			String ext=FileManager.getExtend(item.getName());
+			out.print("당신이 업로드한 파일의 원래 이름은 "+item.getName());
+			String ext=FileManager.getExtend(item.getName());//확장자 구하기
 			String filename=System.currentTimeMillis()+"."+ext;
+			
 			File file=new File(saveDir+"/"+filename);//비어있는 파일
 			item.write(file);//저장 정보를 File 클래스의 인스턴스로 전달!!
+			out.print("보고서 작성<br>");
+			
+			out.print("원래 파일명: "+item.getName()+"<br>");
+			out.print("생성된 파일명: "+filename+"<br>");
+			out.print("저장된 위치: "+saveDir+"<br>");
+			out.print("업로드 파일크기: "+item.getSize()+" bytes <br>");
 		}
 	}
 	

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%! //메서드는 선언부에만 넣을 수 있다!!
-	//앞으로 재사용성이 높은 jsp 코드를 이파일에 머서드로 모아놓겠다!!
+	  //앞으로 재사용성이 높은 jsp 코드를 이 파일에 메서드로 모아놓겠다!!
 
 	//선언부는 멤버변수와 메서드를 정의할 수 있다.
 	public String getMsgBack(String msg){//욕하고, 이전페이지 보여주기

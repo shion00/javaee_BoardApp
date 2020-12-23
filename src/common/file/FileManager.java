@@ -1,7 +1,7 @@
 /*
  *파일과 관련된 유용한 기능을 모아놓은 클래스 
  * */
-package common;
+package common.file;
 
 public class FileManager {
 	
